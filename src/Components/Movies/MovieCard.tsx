@@ -34,7 +34,7 @@ export default function MovieCard({ title, year, imageUrl, description, loading 
           </React.Fragment>
         ) : (
           <div>
-            <Typography gutterBottom variant="h5" component="div" sx={{ minHeight: 60 }}>
+            <Typography gutterBottom variant="h5" component="div" sx={{ minHeight: 20 }}>
               {title}
             </Typography>
             <Typography gutterBottom variant="h5" component="div">

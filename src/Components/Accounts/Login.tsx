@@ -7,6 +7,7 @@ import { ILogin } from "./Login-User";
 const Login = () => {
     const {register, handleSubmit, formState:{errors}, } = useForm<ILogin>();
     const onSubmit = (user:ILogin) =>{
+        alert(`Username: ${user.username}, Password: ${user.password}`);
 
     }
     return (
@@ -14,13 +15,14 @@ const Login = () => {
             <h2>Login</h2>
             <Box>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <TextField
+                    <TextField 
                         {...register("username")}
                         id="username-input"
                         label="Login"
                         type="username"
                         autoComplete="username"
-                    />
+                        style={{ margin: '8px 0'}} 
+                        />
                     <br></br>
                     <TextField
                         {...register("password")}
@@ -28,7 +30,7 @@ const Login = () => {
                         label="Password"
                         type="password"
                         autoComplete="password"
-                    />
+                        />
                     <br></br>
                     <Button variant="contained" type="submit">Login</Button>
                 </form>
