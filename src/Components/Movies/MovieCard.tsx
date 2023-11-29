@@ -5,17 +5,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import cinema from '../../Assets/Images/cinema.png';
-import { IMovie } from './movie';
+import { IMovie } from '../Models/movie';
 import Skeleton from '@mui/material/Skeleton';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function MovieCard({ title, year, imageUrl, description, loading = true }: IMovie) {
+export default function MovieCard({ id, title, year, imageUrl, description, loading = true }: IMovie) {
 
   return (
-    <Card sx={{ 
-      //  height: 680, width: 300
-        }}>
-
+    <Card>
       {loading ? (
         <Skeleton sx={{ height: 600 }} animation="wave" variant="rectangular" />
       ) : (
@@ -47,7 +45,8 @@ export default function MovieCard({ title, year, imageUrl, description, loading 
         )}
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
+        <Button size="small">
+          <Link to={`/movies/${id}`}>Details</Link></Button>
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>

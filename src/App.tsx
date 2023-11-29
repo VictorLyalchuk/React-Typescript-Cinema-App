@@ -4,15 +4,16 @@ import './App.css';
 import Home from './Components/Home';
 import MoviesList from './Components/Movies/MoviesList';
 import Login from './Components/Accounts/Login';
+import Details from './Components/Movies/Details';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />}></Route>
-          <Route path='movies' element = {<MoviesList/>}></Route>
-          <Route path='login' element = {<Login/>}></Route>
+          <Route path="movies" element={<MoviesList />} />
+          <Route path="movies/:id" element={<Details />} />
+          <Route path='login' element={<Login />}></Route>
         </Route>
       </Routes>
     </div>

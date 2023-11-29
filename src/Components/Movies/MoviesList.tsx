@@ -1,22 +1,19 @@
 import Grid from "@mui/material/Grid";
 import MovieCard from "./MovieCard";
-import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import { useEffect, useState } from "react";
-import { IMovie } from "./movie";
+import { IMovie } from "../Models/movie";
 
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+    padding: theme.spacing(2),
+    height : 930
+
 }));
-// const api:string='https://api.themoviedb.org/3/discover/movie?api_key=5be186fbc7705c48999b4954a5e9325f';
 const api: string = 'https://cinema-webapi.azurewebsites.net/api/movie'
 const MoviesList = () => {
     const [movies, SetMovies] = useState<IMovie[] | undefined>();
@@ -57,9 +54,7 @@ const MoviesList = () => {
             if (res.status == 200) {
                 const data = await res.json();
                 SetMovies(data);
-                // setTimeout(() => {
                     setLoading(false);
-                // }, 2000);
             }
             else {
                 setLoading(true);
@@ -82,7 +77,8 @@ const MoviesList = () => {
                         <Grid key={k} item xs={12} sm={6} md={3}>
                             <Item>
                                 {/* <MovieCard movie={movie} /> */}
-                                <MovieCard title={movie.title}
+                                <MovieCard id = {movie.id}
+                                    title={movie.title}
                                     year={movie.year}
                                     imageUrl={movie.imageUrl}
                                     description={movie.description}
