@@ -6,22 +6,21 @@ import { IMovie } from '../Models/movie';
 const Details: React.FC = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState<IMovie | undefined>();
-  
+
   useEffect(() => {
-      const fetchMovie = async () => {
-          try {
-              const response = await fetch(`https://cinema-webapi.azurewebsites.net/api/movie/${id}`);
-              if (response.ok) {
-                  const data = await response.json();
-                  setMovie(data);
-                } else {
+    const fetchMovie = async () => {
+      try {
+        const response = await fetch(`https://cinema-webapi.azurewebsites.net/api/movie/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setMovie(data);
+        } else {
           console.error(`Failed to fetch movie with id ${id}`);
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Error fetching movie:', error);
-    }
-};
-
+      }
+    };
     fetchMovie();
   }, [id]);
 

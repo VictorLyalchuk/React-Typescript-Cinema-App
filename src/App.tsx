@@ -5,6 +5,7 @@ import Home from './Components/Home';
 import MoviesList from './Components/Movies/MoviesList';
 import Login from './Components/Accounts/Login';
 import Details from './Components/Movies/Details';
+import Edit from './Components/Movies/Edit';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="movies" element={<MoviesList />} />
-          <Route path="movies/:id" element={<Details />} />
+          <Route path="details/:id" element={<Details />} />
+          <Route path="edit/:id" element={<Edit />} />
           <Route path='login' element={<Login />}></Route>
         </Route>
       </Routes>

@@ -8,17 +8,35 @@ import cinema from '../../Assets/Images/cinema.png';
 import { IMovie } from '../Models/movie';
 import Skeleton from '@mui/material/Skeleton';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function MovieCard({ id, title, year, imageUrl, description, loading = true }: IMovie) {
-
+  const navigate = useNavigate();
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch(`https://cinema-webapi.azurewebsites.net/api/Movie/Delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        console.log(`Movie with id ${id} deleted successfully`);
+      } else {
+        console.error(`Failed to delete movie with id ${id}`);
+      }
+    } catch (error) {
+      console.error('Error deleting movie:', error);
+    }
+    navigate('/movies');
+  };
   return (
     <Card>
       {loading ? (
         <Skeleton sx={{ height: 600 }} animation="wave" variant="rectangular" />
       ) : (
         <CardMedia
-          sx={{  }}
+          sx={{}}
           component="img"
           src={`${imageUrl}`}
           title={title}
@@ -27,8 +45,8 @@ export default function MovieCard({ id, title, year, imageUrl, description, load
       <CardContent sx={{ maxHeight: 450 }}>
         {loading ? (
           <React.Fragment>
-            <Skeleton  height= {60} animation="wave" />
-            <Skeleton animation="wave" height={200}  />
+            <Skeleton height={60} animation="wave" />
+            <Skeleton animation="wave" height={200} />
           </React.Fragment>
         ) : (
           <div>
@@ -45,9 +63,9 @@ export default function MovieCard({ id, title, year, imageUrl, description, load
         )}
       </CardContent>
       <CardActions>
-        <Button size="small">
-          <Link to={`/movies/${id}`}>Details</Link></Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small"><Link to={`/details/${id}`}>Details</Link></Button>
+        <Button size="small"><Link to={`/edit/${id}`}>Edit</Link></Button>
+        <Button size="small" onClick={() => handleDelete(id)}>Delete</Button>
       </CardActions>
     </Card>
   );

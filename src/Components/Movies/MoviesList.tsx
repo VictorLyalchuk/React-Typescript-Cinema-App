@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 
 const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
-    height : 930
+    // height : 900
 
 }));
 const api: string = 'https://cinema-webapi.azurewebsites.net/api/movie'
